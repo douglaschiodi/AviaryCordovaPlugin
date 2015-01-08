@@ -133,23 +133,30 @@ public class Aviary extends CordovaPlugin {
 	    if (resultCode == Activity.RESULT_OK || resultCode == Activity.RESULT_CANCELED) {
 	        switch (requestCode) {
 	            case ACTION_REQUEST_FEATHER:
-	                Uri mImageUri = data.getData();
-	                Boolean mChanged = data.getBooleanExtra("EXTRA_OUT_BITMAP_CHANGED", false);
-	                
-	                try {
-		                JSONObject returnVal = new JSONObject();
-		                //returnVal.put("changed", mChanged); // doesn't ever seem to be anything other than false
+	            	if(data==null)
+	            	{
+	            	     this.callbackContext.error("Dados Nulos de retorno");
+	            	}
+	            	else
+	            	{
+		                Uri mImageUri = data.getData();
+		                Boolean mChanged = data.getBooleanExtra("EXTRA_OUT_BITMAP_CHANGED", false);
 		                
-		                if (mImageUri != null){
-			                returnVal.put("src", mImageUri.toString());
-			                returnVal.put("name", mImageUri.getLastPathSegment());			                	
+		                try {
+			                JSONObject returnVal = new JSONObject();
+			                //returnVal.put("changed", mChanged); // doesn't ever seem to be anything other than false
+			                
+			                if (mImageUri != null){
+				                returnVal.put("src", mImageUri.toString());
+				                returnVal.put("name", mImageUri.getLastPathSegment());			                	
+			                }
+		       
+			                this.callbackContext.success(returnVal);
+		                } catch(JSONException ex) {
+		    				Log.e(LOG_TAG, ex.toString());
+		                	this.callbackContext.error(ex.getMessage());
 		                }
-	       
-		                this.callbackContext.success(returnVal);
-	                } catch(JSONException ex) {
-	    				Log.e(LOG_TAG, ex.toString());
-	                	this.callbackContext.error(ex.getMessage());
-	                }
+	            	}
 	                break;
 	       }
 	    }
