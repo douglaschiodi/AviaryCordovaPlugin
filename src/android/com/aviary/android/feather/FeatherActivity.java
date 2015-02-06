@@ -648,7 +648,7 @@ public class FeatherActivity extends MonitoredActivity implements OnToolbarClick
 		System.out.println("PASSOU DO  getApiKey");
 		try {
 			System.out.println("TENTANDO ABRIR NATIVE");
-			NativeFilterProxy.init( this, api_key );
+			//NativeFilterProxy.init( this, api_key );
 		} catch ( AviaryInitializationException e ) {
 			System.out.println("FALHOU TENTANDO ABRIR NATIVE");
 			e.printStackTrace();
