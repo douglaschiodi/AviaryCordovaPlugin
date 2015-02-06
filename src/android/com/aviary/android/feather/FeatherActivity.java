@@ -646,7 +646,7 @@ public class FeatherActivity extends MonitoredActivity implements OnToolbarClick
 		final String api_key = getApiKey( this );
 
 		System.out.println("PASSOU DO  getApiKey");
-		try {
+		/*try {
 			System.out.println("TENTANDO ABRIR NATIVE");
 			//NativeFilterProxy.init( this, api_key );
 		} catch ( AviaryInitializationException e ) {
@@ -655,7 +655,7 @@ public class FeatherActivity extends MonitoredActivity implements OnToolbarClick
 
 			Toast.makeText( getApplicationContext(), "Sorry an error occurred: " + e.getMessage(), Toast.LENGTH_LONG ).show();
 			finish();
-		}
+		}*/
 
 		if ( api_key == null || !( api_key.length() > 0 ) ) {
 			logger.error( "Attention. API-KEY cannot be found or is invalid" );
