@@ -580,9 +580,21 @@ public class FeatherActivity extends MonitoredActivity implements OnToolbarClick
 		LocalDataService dataService = mMainController.getService( LocalDataService.class );
 		dataService.setOriginalIntent( getIntent() );
 		
-		onInitializeUtils();
-		onInitializeUI();
-		onRegisterReceiver();
+		try
+		{
+			System.out.println("INICIANDO PARTE COMPLICADA");
+			onInitializeUtils();
+			System.out.println("INICIANDO PARTE COMPLICADA: onInitializeUtils();");
+			onInitializeUI();
+			System.out.println("INICIANDO PARTE COMPLICADA: onInitializeUI();");
+			onRegisterReceiver();
+			System.out.println("INICIANDO PARTE COMPLICADA: onRegisterReceiver();");
+		}
+		catch(Exception e)
+		{
+			System.out.println("DCC EXCECAO: " + e.getMessage());
+		   logger.error( "FALHA AVIARY DCC: ", e);
+		}
 
 		// initiate the filter manager
 		mMainController.setOnToolListener( this );
@@ -630,11 +642,15 @@ public class FeatherActivity extends MonitoredActivity implements OnToolbarClick
 	 */
 	protected void onInitializeUtils() {
 
+		System.out.println("INICIANDO onInitializeUtils");
 		final String api_key = getApiKey( this );
 
+		System.out.println("PASSOU DO  getApiKey");
 		try {
+			System.out.println("TENTANDO ABRIR NATIVE");
 			NativeFilterProxy.init( this, api_key );
 		} catch ( AviaryInitializationException e ) {
+			System.out.println("FALHOU TENTANDO ABRIR NATIVE");
 			e.printStackTrace();
 
 			Toast.makeText( getApplicationContext(), "Sorry an error occurred: " + e.getMessage(), Toast.LENGTH_LONG ).show();
