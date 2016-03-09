@@ -17,7 +17,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.FloatMath;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -391,7 +390,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 			return new PointF( pt1.x + ( pt2.x - pt1.x ) * t, pt1.y + ( pt2.y - pt1.y ) * t );
 		}
 
-		@SuppressLint ( "FloatMath" )
+		//@SuppressLint ( "FloatMath" )
 		@Override
 		public void run() {
 
@@ -437,7 +436,7 @@ public class DelayedSpotDrawPanel extends AbstractContentPanel implements OnDraw
 
 						float x = Math.abs( firstPoint.x - lastPoint.x );
 						float y = Math.abs( firstPoint.y - lastPoint.y );
-						float length = FloatMath.sqrt( x * x + y * y );
+						float length = (float)Math.sqrt( x * x + y * y );
 						float currentPosition = 0;
 						float lerp;
 
